@@ -473,241 +473,115 @@ class _ClientesListWidgetState extends State<ClientesListWidget>
                                                             listViewClientesRecordList[
                                                                 listViewIndex];
                                                         return Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      16.0,
-                                                                      8.0,
-                                                                      16.0,
-                                                                      0.0),
-                                                          child: StreamBuilder<
-                                                              List<
-                                                                  ClientesRecord>>(
-                                                            stream:
-                                                                queryClientesRecord(
-                                                              singleRecord:
-                                                                  true,
-                                                            ),
-                                                            builder: (context,
-                                                                snapshot) {
-                                                              // Customize what your widget looks like when it's loading.
-                                                              if (!snapshot
-                                                                  .hasData) {
-                                                                return Center(
-                                                                  child:
-                                                                      SizedBox(
-                                                                    width: 50.0,
-                                                                    height:
-                                                                        50.0,
-                                                                    child:
-                                                                        CircularProgressIndicator(
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primary,
-                                                                    ),
-                                                                  ),
-                                                                );
-                                                              }
-                                                              List<ClientesRecord>
-                                                                  containerClientesRecordList =
-                                                                  snapshot
-                                                                      .data!;
-                                                              // Return an empty Container when the item does not exist.
-                                                              if (snapshot.data!
-                                                                  .isEmpty) {
-                                                                return Container();
-                                                              }
-                                                              final containerClientesRecord =
-                                                                  containerClientesRecordList
-                                                                          .isNotEmpty
-                                                                      ? containerClientesRecordList
-                                                                          .first
-                                                                      : null;
-                                                              return InkWell(
-                                                                splashColor: Colors
-                                                                    .transparent,
-                                                                focusColor: Colors
-                                                                    .transparent,
-                                                                hoverColor: Colors
-                                                                    .transparent,
-                                                                highlightColor:
-                                                                    Colors
-                                                                        .transparent,
-                                                                onTap:
-                                                                    () async {
-                                                                  context.pushNamed(
-                                                                      'userDetails');
-                                                                },
-                                                                child:
-                                                                    Container(
-                                                                  width: double
-                                                                      .infinity,
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .secondaryBackground,
-                                                                    boxShadow: [
-                                                                      BoxShadow(
-                                                                        blurRadius:
-                                                                            3.0,
-                                                                        color: Color(
-                                                                            0x20000000),
-                                                                        offset: Offset(
-                                                                            0.0,
-                                                                            1.0),
-                                                                      )
-                                                                    ],
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            12.0),
-                                                                  ),
-                                                                  child:
-                                                                      Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            8.0,
-                                                                            8.0,
-                                                                            12.0,
-                                                                            8.0),
-                                                                    child: Row(
-                                                                      mainAxisSize:
-                                                                          MainAxisSize
-                                                                              .max,
-                                                                      crossAxisAlignment:
-                                                                          CrossAxisAlignment
-                                                                              .center,
-                                                                      children: [
-                                                                        Expanded(
-                                                                          child:
-                                                                              Column(
-                                                                            mainAxisSize:
-                                                                                MainAxisSize.max,
-                                                                            crossAxisAlignment:
-                                                                                CrossAxisAlignment.start,
-                                                                            children: [
-                                                                              Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        16.0,
+                                                                        8.0,
+                                                                        16.0,
+                                                                        0.0),
+                                                            child: InkWell(
+                                                              splashColor: Colors
+                                                                  .transparent,
+                                                              focusColor: Colors
+                                                                  .transparent,
+                                                              hoverColor: Colors
+                                                                  .transparent,
+                                                              highlightColor:
+                                                                  Colors
+                                                                      .transparent,
+                                                              onTap: () async {
+                                                                context.pushNamed(
+                                                                    'userDetails');
+                                                              },
+                                                              child: Container(
+                                                                width: double
+                                                                    .infinity,
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .secondaryBackground,
+                                                                  boxShadow: [
+                                                                    BoxShadow(
+                                                                      blurRadius:
+                                                                          3.0,
+                                                                      color: Color(
+                                                                          0x20000000),
+                                                                      offset: Offset(
+                                                                          0.0,
+                                                                          1.0),
+                                                                    )
+                                                                  ],
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              12.0),
+                                                                ),
+                                                                child: Padding(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          8.0,
+                                                                          8.0,
+                                                                          12.0,
+                                                                          8.0),
+                                                                  child: Row(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .center,
+                                                                    children: [
+                                                                      Expanded(
+                                                                        child:
+                                                                            Column(
+                                                                          mainAxisSize:
+                                                                              MainAxisSize.max,
+                                                                          crossAxisAlignment:
+                                                                              CrossAxisAlignment.start,
+                                                                          children: [
+                                                                            Padding(
                                                                                 padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                                                                                child: StreamBuilder<List<ClientesRecord>>(
-                                                                                  stream: queryClientesRecord(
-                                                                                    singleRecord: true,
-                                                                                  ),
-                                                                                  builder: (context, snapshot) {
-                                                                                    // Customize what your widget looks like when it's loading.
-                                                                                    if (!snapshot.hasData) {
-                                                                                      return Center(
-                                                                                        child: SizedBox(
-                                                                                          width: 50.0,
-                                                                                          height: 50.0,
-                                                                                          child: CircularProgressIndicator(
-                                                                                            color: FlutterFlowTheme.of(context).primary,
-                                                                                          ),
-                                                                                        ),
-                                                                                      );
-                                                                                    }
-                                                                                    List<ClientesRecord> textClientesRecordList = snapshot.data!;
-                                                                                    // Return an empty Container when the item does not exist.
-                                                                                    if (snapshot.data!.isEmpty) {
-                                                                                      return Container();
-                                                                                    }
-                                                                                    final textClientesRecord = textClientesRecordList.isNotEmpty ? textClientesRecordList.first : null;
-                                                                                    return Text(
-                                                                                      textClientesRecord!.nombreDeCliente,
-                                                                                      style: FlutterFlowTheme.of(context).titleMedium,
-                                                                                    );
-                                                                                  },
-                                                                                ),
-                                                                              ),
-                                                                              Padding(
+                                                                                child: Text(
+                                                                                  listViewClientesRecordList[listViewIndex].nombreDeCliente,
+                                                                                  style: FlutterFlowTheme.of(context).titleMedium,
+                                                                                )),
+                                                                            Padding(
                                                                                 padding: EdgeInsetsDirectional.fromSTEB(16.0, 2.0, 0.0, 0.0),
-                                                                                child: StreamBuilder<List<ClientesRecord>>(
-                                                                                  stream: queryClientesRecord(
-                                                                                    singleRecord: true,
-                                                                                  ),
-                                                                                  builder: (context, snapshot) {
-                                                                                    // Customize what your widget looks like when it's loading.
-                                                                                    if (!snapshot.hasData) {
-                                                                                      return Center(
-                                                                                        child: SizedBox(
-                                                                                          width: 50.0,
-                                                                                          height: 50.0,
-                                                                                          child: CircularProgressIndicator(
-                                                                                            color: FlutterFlowTheme.of(context).primary,
-                                                                                          ),
-                                                                                        ),
-                                                                                      );
-                                                                                    }
-                                                                                    List<ClientesRecord> textClientesRecordList = snapshot.data!;
-                                                                                    // Return an empty Container when the item does not exist.
-                                                                                    if (snapshot.data!.isEmpty) {
-                                                                                      return Container();
-                                                                                    }
-                                                                                    final textClientesRecord = textClientesRecordList.isNotEmpty ? textClientesRecordList.first : null;
-                                                                                    return Text(
-                                                                                      textClientesRecord!.domicilio,
-                                                                                      style: FlutterFlowTheme.of(context).bodySmall,
-                                                                                    );
-                                                                                  },
-                                                                                ),
-                                                                              ),
-                                                                              Padding(
+                                                                                child: Text(
+                                                                                  listViewClientesRecordList[listViewIndex].domicilio,
+                                                                                  style: FlutterFlowTheme.of(context).bodySmall,
+                                                                                )),
+                                                                            Padding(
                                                                                 padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                                                                                child: StreamBuilder<List<ClientesRecord>>(
-                                                                                  stream: queryClientesRecord(
-                                                                                    singleRecord: true,
-                                                                                  ),
-                                                                                  builder: (context, snapshot) {
-                                                                                    // Customize what your widget looks like when it's loading.
-                                                                                    if (!snapshot.hasData) {
-                                                                                      return Center(
-                                                                                        child: SizedBox(
-                                                                                          width: 50.0,
-                                                                                          height: 50.0,
-                                                                                          child: CircularProgressIndicator(
-                                                                                            color: FlutterFlowTheme.of(context).primary,
-                                                                                          ),
-                                                                                        ),
-                                                                                      );
-                                                                                    }
-                                                                                    List<ClientesRecord> textClientesRecordList = snapshot.data!;
-                                                                                    // Return an empty Container when the item does not exist.
-                                                                                    if (snapshot.data!.isEmpty) {
-                                                                                      return Container();
-                                                                                    }
-                                                                                    final textClientesRecord = textClientesRecordList.isNotEmpty ? textClientesRecordList.first : null;
-                                                                                    return Text(
-                                                                                      textClientesRecord!.numeroDeContacto,
-                                                                                      style: FlutterFlowTheme.of(context).bodySmall.override(
-                                                                                            fontFamily: FlutterFlowTheme.of(context).bodySmallFamily,
-                                                                                            color: FlutterFlowTheme.of(context).primary,
-                                                                                            fontSize: 20.0,
-                                                                                            useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodySmallFamily),
-                                                                                          ),
-                                                                                    );
-                                                                                  },
-                                                                                ),
-                                                                              ),
-                                                                            ],
-                                                                          ),
+                                                                                child: Text(
+                                                                                  listViewClientesRecordList[listViewIndex].numeroDeContacto,
+                                                                                  style: FlutterFlowTheme.of(context).bodySmall.override(
+                                                                                        fontFamily: FlutterFlowTheme.of(context).bodySmallFamily,
+                                                                                        color: FlutterFlowTheme.of(context).primary,
+                                                                                        fontSize: 20.0,
+                                                                                        useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodySmallFamily),
+                                                                                      ),
+                                                                                ))
+                                                                          ],
                                                                         ),
-                                                                        Icon(
-                                                                          Icons
-                                                                              .east,
-                                                                          color:
-                                                                              FlutterFlowTheme.of(context).primary,
-                                                                          size:
-                                                                              24.0,
-                                                                        ),
-                                                                      ],
-                                                                    ),
+                                                                      ),
+                                                                      Icon(
+                                                                        Icons
+                                                                            .east,
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .primary,
+                                                                        size:
+                                                                            24.0,
+                                                                      ),
+                                                                    ],
                                                                   ),
                                                                 ),
-                                                              ).animateOnPageLoad(
-                                                                  animationsMap[
-                                                                      'containerOnPageLoadAnimation1']!);
-                                                            },
-                                                          ),
-                                                        );
+                                                              ),
+                                                            ).animateOnPageLoad(
+                                                                animationsMap[
+                                                                    'containerOnPageLoadAnimation1']!));
                                                       },
                                                     ),
                                                   );
