@@ -399,7 +399,7 @@ class _UserDetailsWidgetState extends State<UserDetailsWidget>
                                 },
                               ),
                               FlutterFlowIconButton(
-                                borderColor: Colors.transparent,
+                                borderColor: Color.fromARGB(0, 211, 5, 5),
                                 borderRadius: 30.0,
                                 borderWidth: 1.0,
                                 buttonSize: 60.0,
@@ -466,7 +466,7 @@ class _UserDetailsWidgetState extends State<UserDetailsWidget>
                                       : null;
                               return Text(
                                 formatNumber(
-                                  textClientesRecord!.costoDeRenta,
+                                  textClientesRecord!.costoDeRenta(),
                                   formatType: FormatType.decimal,
                                   decimalType: DecimalType.automatic,
                                 ),

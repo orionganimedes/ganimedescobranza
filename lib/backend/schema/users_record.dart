@@ -102,7 +102,7 @@ Map<String, dynamic> createUsersRecordData({
       'display_name': displayName,
       'photo_url': photoUrl,
       'created_time': createdTime,
-    }.withoutNulls,
+    }.withoutNulls(),
   );
 
   return firestoreData;

@@ -924,9 +924,6 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                     .length,
                                             itemBuilder:
                                                 (context, listViewIndex) {
-                                              final listViewClientesRecord =
-                                                  listViewClientesRecordList[
-                                                      listViewIndex];
                                               return Padding(
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(

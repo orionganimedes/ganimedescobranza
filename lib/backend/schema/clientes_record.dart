@@ -1,10 +1,14 @@
-import 'dart:async';
-
-import '/backend/schema/util/firestore_util.dart';
-import '/backend/schema/util/schema_util.dart';
-
-import 'index.dart';
-import '/flutter_flow/flutter_flow_util.dart';
+import 'dart:async' show Future, Stream;
+import '/backend/schema/util/firestore_util.dart'
+    show FirestoreRecord, mapFromFirestore, mapToFirestore;
+import '/backend/schema/util/schema_util.dart'
+    show MapDataExtensions, castToType;
+import 'package:ganimedes/backend/schema/index.dart'
+    show
+        CollectionReference,
+        DocumentReference,
+        DocumentSnapshot,
+        FirebaseFirestore;
 
 class ClientesRecord extends FirestoreRecord {
   ClientesRecord._(
@@ -41,7 +45,7 @@ class ClientesRecord extends FirestoreRecord {
 
   // "costo_de_renta" field.
   double? _costoDeRenta;
-  double get costoDeRenta => _costoDeRenta ?? 0.0;
+  double costoDeRenta() => _costoDeRenta ?? 0.0;
   bool hasCostoDeRenta() => _costoDeRenta != null;
 
   // "pago_efectuado" field.
@@ -97,7 +101,9 @@ class ClientesRecord extends FirestoreRecord {
       'ClientesRecord(reference: ${reference.path}, data: $snapshotData)';
 }
 
-Map<String, dynamic> createClientesRecordData({
+Future<Map<String, dynamic>> createClientesRecordData({
+  Set<dynamic>? set,
+  String? numeroDeContacto = '',
   String? domicilio,
   DateTime? fechaDePago,
   String? giro,
@@ -106,8 +112,7 @@ Map<String, dynamic> createClientesRecordData({
   double? costoDeRenta,
   bool? pagoEfectuado,
   bool? pagoNoEfectuado,
-  String? numeroDeContacto,
-}) {
+}) async {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'domicilio': domicilio,
@@ -119,7 +124,7 @@ Map<String, dynamic> createClientesRecordData({
       'pago_efectuado': pagoEfectuado,
       'pago_no_efectuado': pagoNoEfectuado,
       'numero_de_contacto': numeroDeContacto,
-    }.withoutNulls,
+    }.withoutNulls(),
   );
 
   return firestoreData;

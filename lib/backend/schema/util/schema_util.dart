@@ -50,7 +50,7 @@ T? castToType<T>(dynamic value) {
 }
 
 extension MapDataExtensions on Map<String, dynamic> {
-  Map<String, dynamic> get withoutNulls => Map.fromEntries(
+  Map<String, dynamic> withoutNulls() => Map.fromEntries(
         entries
             .where((e) => e.value != null)
             .map((e) => MapEntry(e.key, e.value!)),

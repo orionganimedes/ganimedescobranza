@@ -38,6 +38,10 @@ class ClientenuevoModel extends FlutterFlowModel {
   String? Function(BuildContext, String?)? numeroDePredialControllerValidator;
   DateTime? datePicked;
 
+  get domicilioController => null;
+
+  fechaDePagoController() => null;
+
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {
@@ -57,5 +61,4 @@ class ClientenuevoModel extends FlutterFlowModel {
   }
 
   /// Additional helper methods are added here.
-
 }
