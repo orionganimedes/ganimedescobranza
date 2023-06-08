@@ -1,5 +1,6 @@
-import '/auth/firebase_auth/auth_util.dart';
+import '../auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import 'package:intl/intl.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -22,9 +23,12 @@ class ClientenuevoWidget extends StatefulWidget {
 
 class _ClientenuevoWidgetState extends State<ClientenuevoWidget> {
   late ClientenuevoModel _model;
+  late Map<String, dynamic> _clientenuevoRecord;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final _unfocusNode = FocusNode();
+
+  get datePicked => null;
 
   @override
   void initState() {
@@ -38,6 +42,20 @@ class _ClientenuevoWidgetState extends State<ClientenuevoWidget> {
     _model.giroController ??= TextEditingController();
     _model.numeroDePredialController ??= TextEditingController();
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+
+    var format = NumberFormat('#,###');
+    var costoDeRentaValue = _model.costoDeRentaController?.text ?? '0';
+    var costoDeRentaFormatted = format.format(double.parse(costoDeRentaValue));
+
+    _clientenuevoRecord = {
+      'nombre_de_cliente': _model.nombreDeClienteController?.text ?? '',
+      'numero_de_contacto': _model.numeroDeContactoController?.text ?? '',
+      'direccion': _model.direccionController?.text ?? '',
+      'costo_de_renta': double.parse(costoDeRentaFormatted),
+      'giro': _model.giroController?.text ?? '',
+      'numero_de_predial': _model.numeroDePredialController?.text ?? '',
+      'datePicked': datePicked ?? '',
+    };
   }
 
   @override
@@ -147,1328 +165,219 @@ class _ClientenuevoWidgetState extends State<ClientenuevoWidget> {
                                 ),
                               );
                             }
-                            List<ClientesRecord> containerClientesRecordList =
-                                snapshot.data!;
+                            // ignore: unused_local_variable
+                            List<ClientesRecord> containerClientesRecordList;
+                            containerClientesRecordList = snapshot.data!;
                             // Return an empty Container when the item does not exist.
                             if (snapshot.data!.isEmpty) {
                               return Container();
                             }
-                            final containerClientesRecord =
-                                containerClientesRecordList.isNotEmpty
-                                    ? containerClientesRecordList.first
-                                    : null;
+                            var inputDecoration = InputDecoration(
+                              labelText: 'Fecha de pago',
+                              hintStyle: TextStyle(
+                                fontFamily: 'Poppins',
+                                color: Color(0xFF95A1AC),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0xFFDBE2E7),
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              filled: true,
+                              fillColor: Theme.of(context).primaryColor,
+                              contentPadding:
+                                  EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0),
+                            );
+                            var container = Container(
+                              width: double.infinity,
+                              constraints: BoxConstraints(
+                                maxWidth: 430.0,
+                              ),
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                              ),
+                              child: Align(
+                                alignment: AlignmentDirectional(0.0, 0.0),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      24.0, 24.0, 24.0, 24.0),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      //campo de texto nombre de cliente
+                                      widget,
+                                      TextFormField(
+                                        controller:
+                                            _model.nombreDeClienteController,
+                                        decoration: InputDecoration(
+                                          labelText: 'Nombre de cliente',
+                                          hintStyle: TextStyle(
+                                            fontFamily: 'Poppins',
+                                            color: Color(0xFF95A1AC),
+                                          ),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: Color(0xFFDBE2E7),
+                                              width: 2,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                          filled: true,
+                                          fillColor:
+                                              Theme.of(context).primaryColor,
+                                          contentPadding: EdgeInsets.fromLTRB(
+                                              20.0, 20.0, 20.0, 20.0),
+                                        ),
+                                      ),
+                                      SizedBox(height: 16.0),
+                                      // campo de numero de contacto
+                                      TextFormField(
+                                        controller:
+                                            _model.numeroDeContactoController,
+                                        keyboardType: TextInputType.number,
+                                        decoration: InputDecoration(
+                                          labelText: 'Numero de contacto',
+                                          hintStyle: TextStyle(
+                                            fontFamily: 'Poppins',
+                                            color: Color(0xFF95A1AC),
+                                          ),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: Color(0xFFDBE2E7),
+                                              width: 2,
+                                            ),
+                                          ),
+                                          filled: true,
+                                          fillColor:
+                                              Theme.of(context).primaryColor,
+                                          contentPadding: EdgeInsets.fromLTRB(
+                                              20.0, 20.0, 20.0, 20.0),
+                                        ),
+                                      ),
+                                      SizedBox(height: 16.0),
+                                      // campo del domicilio
+                                      TextFormField(
+                                        controller: _model.domicilioController,
+                                        decoration: InputDecoration(
+                                          labelText: 'Domicilio',
+                                          labelStyle: TextStyle(
+                                            fontFamily: 'Poppins',
+                                            color:
+                                                Theme.of(context).primaryColor,
+                                          ),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: Color(0xFFDBE2E7),
+                                              width: 2,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                          ),
+                                          filled: true,
+                                          fillColor:
+                                              Theme.of(context).primaryColor,
+                                          contentPadding: EdgeInsets.fromLTRB(
+                                              20.0, 20.0, 20.0, 20.0),
+                                        ),
+                                      ),
+                                      SizedBox(height: 16.0),
+                                      // campo de fecha de pago
+                                      TextFormField(
+                                        controller:
+                                            _model.fechaDePagoController(),
+                                        readOnly: true, //campo solo lectura
+                                        onTap: () async {
+                                          DateTime? pickedDate =
+                                              await showDatePicker(
+                                            context: context,
+                                            initialDate: DateTime.now(),
+                                            firstDate: DateTime(2015),
+                                            lastDate: DateTime(2050),
+                                          );
+                                          if (pickedDate != null) {
+                                            _model
+                                                .fechaDePagoController()
+                                                .text = pickedDate.toString();
+                                          }
+                                        },
+                                        decoration: inputDecoration,
+                                      ),
+                                      SizedBox(height: 16.0),
+                                      // campo de costo de renta
+                                      TextFormField(
+                                        controller:
+                                            _model.costoDeRentaController,
+                                        keyboardType: TextInputType.number,
+                                        decoration: InputDecoration(
+                                          labelText: 'Costo de renta',
+                                          hintStyle: TextStyle(
+                                            fontFamily: 'Poppins',
+                                            color: Color(0xFF95A1AC),
+                                          ),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: Color(0xFFDBE2E7),
+                                              width: 2,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                          filled: true,
+                                          fillColor:
+                                              Theme.of(context).primaryColor,
+                                          contentPadding: EdgeInsets.fromLTRB(
+                                              20.0, 20.0, 20.0, 20.0),
+                                        ),
+                                      ),
+                                      SizedBox(height: 16.0),
+                                      TextFormField(
+                                        controller: _model.giroController,
+                                        keyboardType: TextInputType.text,
+                                        decoration: InputDecoration(
+                                          labelText: 'Giro',
+                                          hintStyle: TextStyle(
+                                            fontFamily: 'Poppins',
+                                            color: Color(0xFF95A1AC),
+                                          ),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: Color(0xFFDBE2E7),
+                                              width: 2,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                          filled: true,
+                                          fillColor:
+                                              Theme.of(context).primaryColor,
+                                          contentPadding: EdgeInsets.fromLTRB(
+                                              20.0, 20.0, 20.0, 20.0),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            );
                             return InkWell(
                               splashColor: Colors.transparent,
                               focusColor: Colors.transparent,
                               hoverColor: Colors.transparent,
                               highlightColor: Colors.transparent,
                               onTap: () async {
-                                final clientesCreateData1 =
-                                    createClientesRecordData();
+                                final clientesCreateData =
+                                    createClientesRecordData;
                                 await ClientesRecord.collection
                                     .doc()
-                                    .set(clientesCreateData1);
-
-                                final clientesCreateData2 =
-                                    createClientesRecordData(
-                                  nombreDeCliente: '',
-                                );
-                                await ClientesRecord.collection
-                                    .doc()
-                                    .set(clientesCreateData2);
-
-                                final clientesCreateData3 =
-                                    createClientesRecordData(
-                                  numeroDeContacto:
-                                      containerClientesRecord!.numeroDeContacto,
-                                );
-                                await ClientesRecord.collection
-                                    .doc()
-                                    .set(clientesCreateData3);
-
-                                final clientesCreateData4 =
-                                    createClientesRecordData(
-                                  domicilio: '',
-                                );
-                                await ClientesRecord.collection
-                                    .doc()
-                                    .set(clientesCreateData4);
-
-                                final clientesCreateData5 =
-                                    createClientesRecordData(
-                                  costoDeRenta:
-                                      containerClientesRecord!.costoDeRenta,
-                                );
-                                await ClientesRecord.collection
-                                    .doc()
-                                    .set(clientesCreateData5);
-
-                                final clientesCreateData6 =
-                                    createClientesRecordData(
-                                  giro: '',
-                                );
-                                await ClientesRecord.collection
-                                    .doc()
-                                    .set(clientesCreateData6);
-
-                                final clientesCreateData7 =
-                                    createClientesRecordData(
-                                  numeroDePredial: '',
-                                );
-                                await ClientesRecord.collection
-                                    .doc()
-                                    .set(clientesCreateData7);
-
-                                final clientesCreateData8 =
-                                    createClientesRecordData(
-                                  fechaDePago:
-                                      containerClientesRecord!.fechaDePago,
-                                );
-                                await ClientesRecord.collection
-                                    .doc()
-                                    .set(clientesCreateData8);
+                                    .set(clientesCreateData);
                               },
-                              child: Container(
-                                width: double.infinity,
-                                constraints: BoxConstraints(
-                                  maxWidth: 430.0,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                ),
-                                child: Align(
-                                  alignment: AlignmentDirectional(0.0, 0.0),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        24.0, 24.0, 24.0, 24.0),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          FFLocalizations.of(context).getText(
-                                            'cwabms3x' /* Agregar Cliente */,
-                                          ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .headlineLarge,
-                                        ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 12.0, 0.0, 24.0),
-                                          child: Text(
-                                            FFLocalizations.of(context).getText(
-                                              'ac4x4rhq' /* Agrega nuevos clientes */,
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .labelMedium,
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 16.0),
-                                          child: StreamBuilder<
-                                              List<ClientesRecord>>(
-                                            stream: queryClientesRecord(
-                                              singleRecord: true,
-                                            ),
-                                            builder: (context, snapshot) {
-                                              // Customize what your widget looks like when it's loading.
-                                              if (!snapshot.hasData) {
-                                                return Center(
-                                                  child: SizedBox(
-                                                    width: 50.0,
-                                                    height: 50.0,
-                                                    child:
-                                                        CircularProgressIndicator(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary,
-                                                    ),
-                                                  ),
-                                                );
-                                              }
-                                              List<ClientesRecord>
-                                                  nombreDeClienteClientesRecordList =
-                                                  snapshot.data!;
-                                              // Return an empty Container when the item does not exist.
-                                              if (snapshot.data!.isEmpty) {
-                                                return Container();
-                                              }
-                                              final nombreDeClienteClientesRecord =
-                                                  nombreDeClienteClientesRecordList
-                                                          .isNotEmpty
-                                                      ? nombreDeClienteClientesRecordList
-                                                          .first
-                                                      : null;
-                                              return Container(
-                                                width: double.infinity,
-                                                child: TextFormField(
-                                                  controller: _model
-                                                      .nombreDeClienteController,
-                                                  onFieldSubmitted: (_) async {
-                                                    final clientesCreateData =
-                                                        createClientesRecordData(
-                                                      nombreDeCliente: '',
-                                                    );
-                                                    await ClientesRecord
-                                                        .collection
-                                                        .doc()
-                                                        .set(
-                                                            clientesCreateData);
-                                                  },
-                                                  autofocus: true,
-                                                  obscureText: false,
-                                                  decoration: InputDecoration(
-                                                    labelText:
-                                                        FFLocalizations.of(
-                                                                context)
-                                                            .getText(
-                                                      'xrgxpk0j' /* Nombre del cliente */,
-                                                    ),
-                                                    labelStyle:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .labelLarge,
-                                                    enabledBorder:
-                                                        OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color: FlutterFlowTheme
-                                                                .of(context)
-                                                            .primaryBackground,
-                                                        width: 2.0,
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12.0),
-                                                    ),
-                                                    focusedBorder:
-                                                        OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primary,
-                                                        width: 2.0,
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12.0),
-                                                    ),
-                                                    errorBorder:
-                                                        OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .error,
-                                                        width: 2.0,
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12.0),
-                                                    ),
-                                                    focusedErrorBorder:
-                                                        OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .error,
-                                                        width: 2.0,
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12.0),
-                                                    ),
-                                                    filled: true,
-                                                    fillColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .primaryBackground,
-                                                  ),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyLarge,
-                                                  validator: _model
-                                                      .nombreDeClienteControllerValidator
-                                                      .asValidator(context),
-                                                ),
-                                              );
-                                            },
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 16.0),
-                                          child: StreamBuilder<
-                                              List<ClientesRecord>>(
-                                            stream: queryClientesRecord(
-                                              singleRecord: true,
-                                            ),
-                                            builder: (context, snapshot) {
-                                              // Customize what your widget looks like when it's loading.
-                                              if (!snapshot.hasData) {
-                                                return Center(
-                                                  child: SizedBox(
-                                                    width: 50.0,
-                                                    height: 50.0,
-                                                    child:
-                                                        CircularProgressIndicator(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary,
-                                                    ),
-                                                  ),
-                                                );
-                                              }
-                                              List<ClientesRecord>
-                                                  numeroDeContactoClientesRecordList =
-                                                  snapshot.data!;
-                                              // Return an empty Container when the item does not exist.
-                                              if (snapshot.data!.isEmpty) {
-                                                return Container();
-                                              }
-                                              final numeroDeContactoClientesRecord =
-                                                  numeroDeContactoClientesRecordList
-                                                          .isNotEmpty
-                                                      ? numeroDeContactoClientesRecordList
-                                                          .first
-                                                      : null;
-                                              return Container(
-                                                width: double.infinity,
-                                                child: TextFormField(
-                                                  controller: _model
-                                                      .numeroDeContactoController,
-                                                  onFieldSubmitted: (_) async {
-                                                    final clientesCreateData =
-                                                        createClientesRecordData(
-                                                      numeroDeContacto:
-                                                          numeroDeContactoClientesRecord!
-                                                              .numeroDeContacto,
-                                                    );
-                                                    await ClientesRecord
-                                                        .collection
-                                                        .doc()
-                                                        .set(
-                                                            clientesCreateData);
-                                                  },
-                                                  autofocus: true,
-                                                  obscureText: false,
-                                                  decoration: InputDecoration(
-                                                    labelText:
-                                                        FFLocalizations.of(
-                                                                context)
-                                                            .getText(
-                                                      'd6u6pz5n' /* Numero de contacto */,
-                                                    ),
-                                                    labelStyle:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .labelLarge,
-                                                    enabledBorder:
-                                                        OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color: FlutterFlowTheme
-                                                                .of(context)
-                                                            .primaryBackground,
-                                                        width: 2.0,
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12.0),
-                                                    ),
-                                                    focusedBorder:
-                                                        OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primary,
-                                                        width: 2.0,
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12.0),
-                                                    ),
-                                                    errorBorder:
-                                                        OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .error,
-                                                        width: 2.0,
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12.0),
-                                                    ),
-                                                    focusedErrorBorder:
-                                                        OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .error,
-                                                        width: 2.0,
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12.0),
-                                                    ),
-                                                    filled: true,
-                                                    fillColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .primaryBackground,
-                                                  ),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyLarge,
-                                                  keyboardType:
-                                                      TextInputType.number,
-                                                  validator: _model
-                                                      .numeroDeContactoControllerValidator
-                                                      .asValidator(context),
-                                                ),
-                                              );
-                                            },
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 16.0),
-                                          child: StreamBuilder<
-                                              List<ClientesRecord>>(
-                                            stream: queryClientesRecord(
-                                              singleRecord: true,
-                                            ),
-                                            builder: (context, snapshot) {
-                                              // Customize what your widget looks like when it's loading.
-                                              if (!snapshot.hasData) {
-                                                return Center(
-                                                  child: SizedBox(
-                                                    width: 50.0,
-                                                    height: 50.0,
-                                                    child:
-                                                        CircularProgressIndicator(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary,
-                                                    ),
-                                                  ),
-                                                );
-                                              }
-                                              List<ClientesRecord>
-                                                  direccionClientesRecordList =
-                                                  snapshot.data!;
-                                              // Return an empty Container when the item does not exist.
-                                              if (snapshot.data!.isEmpty) {
-                                                return Container();
-                                              }
-                                              final direccionClientesRecord =
-                                                  direccionClientesRecordList
-                                                          .isNotEmpty
-                                                      ? direccionClientesRecordList
-                                                          .first
-                                                      : null;
-                                              return Container(
-                                                width: double.infinity,
-                                                child: TextFormField(
-                                                  controller: _model
-                                                      .direccionController,
-                                                  onFieldSubmitted: (_) async {
-                                                    final clientesCreateData =
-                                                        createClientesRecordData(
-                                                      domicilio: '',
-                                                    );
-                                                    await ClientesRecord
-                                                        .collection
-                                                        .doc()
-                                                        .set(
-                                                            clientesCreateData);
-                                                  },
-                                                  autofocus: true,
-                                                  obscureText: !_model
-                                                      .direccionVisibility,
-                                                  decoration: InputDecoration(
-                                                    labelText:
-                                                        FFLocalizations.of(
-                                                                context)
-                                                            .getText(
-                                                      '1w5ojzjv' /* Direccion */,
-                                                    ),
-                                                    labelStyle:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .labelLarge,
-                                                    enabledBorder:
-                                                        OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color: FlutterFlowTheme
-                                                                .of(context)
-                                                            .primaryBackground,
-                                                        width: 2.0,
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12.0),
-                                                    ),
-                                                    focusedBorder:
-                                                        OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primary,
-                                                        width: 2.0,
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12.0),
-                                                    ),
-                                                    errorBorder:
-                                                        OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .error,
-                                                        width: 2.0,
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12.0),
-                                                    ),
-                                                    focusedErrorBorder:
-                                                        OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .error,
-                                                        width: 2.0,
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12.0),
-                                                    ),
-                                                    filled: true,
-                                                    fillColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .primaryBackground,
-                                                    suffixIcon: InkWell(
-                                                      onTap: () => setState(
-                                                        () => _model
-                                                                .direccionVisibility =
-                                                            !_model
-                                                                .direccionVisibility,
-                                                      ),
-                                                      focusNode: FocusNode(
-                                                          skipTraversal: true),
-                                                      child: Icon(
-                                                        _model.direccionVisibility
-                                                            ? Icons
-                                                                .visibility_outlined
-                                                            : Icons
-                                                                .visibility_off_outlined,
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .secondaryText,
-                                                        size: 24.0,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyLarge,
-                                                  minLines: 1,
-                                                  validator: _model
-                                                      .direccionControllerValidator
-                                                      .asValidator(context),
-                                                ),
-                                              );
-                                            },
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 16.0),
-                                          child: StreamBuilder<
-                                              List<ClientesRecord>>(
-                                            stream: queryClientesRecord(
-                                              singleRecord: true,
-                                            ),
-                                            builder: (context, snapshot) {
-                                              // Customize what your widget looks like when it's loading.
-                                              if (!snapshot.hasData) {
-                                                return Center(
-                                                  child: SizedBox(
-                                                    width: 50.0,
-                                                    height: 50.0,
-                                                    child:
-                                                        CircularProgressIndicator(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary,
-                                                    ),
-                                                  ),
-                                                );
-                                              }
-                                              List<ClientesRecord>
-                                                  costoDeRentaClientesRecordList =
-                                                  snapshot.data!;
-                                              // Return an empty Container when the item does not exist.
-                                              if (snapshot.data!.isEmpty) {
-                                                return Container();
-                                              }
-                                              final costoDeRentaClientesRecord =
-                                                  costoDeRentaClientesRecordList
-                                                          .isNotEmpty
-                                                      ? costoDeRentaClientesRecordList
-                                                          .first
-                                                      : null;
-                                              return Container(
-                                                width: double.infinity,
-                                                child: TextFormField(
-                                                  controller: _model
-                                                      .costoDeRentaController,
-                                                  onFieldSubmitted: (_) async {
-                                                    final clientesCreateData =
-                                                        createClientesRecordData(
-                                                      costoDeRenta:
-                                                          costoDeRentaClientesRecord!
-                                                              .costoDeRenta,
-                                                    );
-                                                    await ClientesRecord
-                                                        .collection
-                                                        .doc()
-                                                        .set(
-                                                            clientesCreateData);
-                                                  },
-                                                  autofocus: true,
-                                                  obscureText: !_model
-                                                      .costoDeRentaVisibility,
-                                                  decoration: InputDecoration(
-                                                    labelText:
-                                                        FFLocalizations.of(
-                                                                context)
-                                                            .getText(
-                                                      '2vwpu4a1' /* Costo de renta */,
-                                                    ),
-                                                    labelStyle:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .labelLarge,
-                                                    enabledBorder:
-                                                        OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color: FlutterFlowTheme
-                                                                .of(context)
-                                                            .primaryBackground,
-                                                        width: 2.0,
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12.0),
-                                                    ),
-                                                    focusedBorder:
-                                                        OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primary,
-                                                        width: 2.0,
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12.0),
-                                                    ),
-                                                    errorBorder:
-                                                        OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .error,
-                                                        width: 2.0,
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12.0),
-                                                    ),
-                                                    focusedErrorBorder:
-                                                        OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .error,
-                                                        width: 2.0,
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12.0),
-                                                    ),
-                                                    filled: true,
-                                                    fillColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .primaryBackground,
-                                                    suffixIcon: InkWell(
-                                                      onTap: () => setState(
-                                                        () => _model
-                                                                .costoDeRentaVisibility =
-                                                            !_model
-                                                                .costoDeRentaVisibility,
-                                                      ),
-                                                      focusNode: FocusNode(
-                                                          skipTraversal: true),
-                                                      child: Icon(
-                                                        _model.costoDeRentaVisibility
-                                                            ? Icons
-                                                                .visibility_outlined
-                                                            : Icons
-                                                                .visibility_off_outlined,
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .secondaryText,
-                                                        size: 24.0,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyLarge,
-                                                  minLines: 1,
-                                                  keyboardType:
-                                                      TextInputType.number,
-                                                  validator: _model
-                                                      .costoDeRentaControllerValidator
-                                                      .asValidator(context),
-                                                ),
-                                              );
-                                            },
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 16.0),
-                                          child: StreamBuilder<
-                                              List<ClientesRecord>>(
-                                            stream: queryClientesRecord(
-                                              singleRecord: true,
-                                            ),
-                                            builder: (context, snapshot) {
-                                              // Customize what your widget looks like when it's loading.
-                                              if (!snapshot.hasData) {
-                                                return Center(
-                                                  child: SizedBox(
-                                                    width: 50.0,
-                                                    height: 50.0,
-                                                    child:
-                                                        CircularProgressIndicator(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary,
-                                                    ),
-                                                  ),
-                                                );
-                                              }
-                                              List<ClientesRecord>
-                                                  giroClientesRecordList =
-                                                  snapshot.data!;
-                                              // Return an empty Container when the item does not exist.
-                                              if (snapshot.data!.isEmpty) {
-                                                return Container();
-                                              }
-                                              final giroClientesRecord =
-                                                  giroClientesRecordList
-                                                          .isNotEmpty
-                                                      ? giroClientesRecordList
-                                                          .first
-                                                      : null;
-                                              return Container(
-                                                width: double.infinity,
-                                                child: TextFormField(
-                                                  controller:
-                                                      _model.giroController,
-                                                  onFieldSubmitted: (_) async {
-                                                    final clientesCreateData =
-                                                        createClientesRecordData(
-                                                      giro: '',
-                                                    );
-                                                    await ClientesRecord
-                                                        .collection
-                                                        .doc()
-                                                        .set(
-                                                            clientesCreateData);
-                                                  },
-                                                  autofocus: true,
-                                                  obscureText:
-                                                      !_model.giroVisibility,
-                                                  decoration: InputDecoration(
-                                                    labelText:
-                                                        FFLocalizations.of(
-                                                                context)
-                                                            .getText(
-                                                      '79hbqg5v' /* Giro */,
-                                                    ),
-                                                    labelStyle:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .labelLarge,
-                                                    enabledBorder:
-                                                        OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color: FlutterFlowTheme
-                                                                .of(context)
-                                                            .primaryBackground,
-                                                        width: 2.0,
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12.0),
-                                                    ),
-                                                    focusedBorder:
-                                                        OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primary,
-                                                        width: 2.0,
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12.0),
-                                                    ),
-                                                    errorBorder:
-                                                        OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .error,
-                                                        width: 2.0,
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12.0),
-                                                    ),
-                                                    focusedErrorBorder:
-                                                        OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .error,
-                                                        width: 2.0,
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12.0),
-                                                    ),
-                                                    filled: true,
-                                                    fillColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .primaryBackground,
-                                                    suffixIcon: InkWell(
-                                                      onTap: () => setState(
-                                                        () => _model
-                                                                .giroVisibility =
-                                                            !_model
-                                                                .giroVisibility,
-                                                      ),
-                                                      focusNode: FocusNode(
-                                                          skipTraversal: true),
-                                                      child: Icon(
-                                                        _model.giroVisibility
-                                                            ? Icons
-                                                                .visibility_outlined
-                                                            : Icons
-                                                                .visibility_off_outlined,
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .secondaryText,
-                                                        size: 24.0,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyLarge,
-                                                  minLines: 1,
-                                                  validator: _model
-                                                      .giroControllerValidator
-                                                      .asValidator(context),
-                                                ),
-                                              );
-                                            },
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 16.0),
-                                          child: StreamBuilder<
-                                              List<ClientesRecord>>(
-                                            stream: queryClientesRecord(
-                                              singleRecord: true,
-                                            ),
-                                            builder: (context, snapshot) {
-                                              // Customize what your widget looks like when it's loading.
-                                              if (!snapshot.hasData) {
-                                                return Center(
-                                                  child: SizedBox(
-                                                    width: 50.0,
-                                                    height: 50.0,
-                                                    child:
-                                                        CircularProgressIndicator(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary,
-                                                    ),
-                                                  ),
-                                                );
-                                              }
-                                              List<ClientesRecord>
-                                                  numeroDePredialClientesRecordList =
-                                                  snapshot.data!;
-                                              // Return an empty Container when the item does not exist.
-                                              if (snapshot.data!.isEmpty) {
-                                                return Container();
-                                              }
-                                              final numeroDePredialClientesRecord =
-                                                  numeroDePredialClientesRecordList
-                                                          .isNotEmpty
-                                                      ? numeroDePredialClientesRecordList
-                                                          .first
-                                                      : null;
-                                              return Container(
-                                                width: double.infinity,
-                                                child: TextFormField(
-                                                  controller: _model
-                                                      .numeroDePredialController,
-                                                  onFieldSubmitted: (_) async {
-                                                    final clientesCreateData =
-                                                        createClientesRecordData(
-                                                      numeroDePredial:
-                                                          numeroDePredialClientesRecord!
-                                                              .costoDeRenta
-                                                              .toString(),
-                                                    );
-                                                    await ClientesRecord
-                                                        .collection
-                                                        .doc()
-                                                        .set(
-                                                            clientesCreateData);
-                                                  },
-                                                  autofocus: true,
-                                                  obscureText: !_model
-                                                      .numeroDePredialVisibility,
-                                                  decoration: InputDecoration(
-                                                    labelText:
-                                                        FFLocalizations.of(
-                                                                context)
-                                                            .getText(
-                                                      'ttt4g6lk' /* Numero de predial */,
-                                                    ),
-                                                    labelStyle:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .labelLarge,
-                                                    enabledBorder:
-                                                        OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color: FlutterFlowTheme
-                                                                .of(context)
-                                                            .primaryBackground,
-                                                        width: 2.0,
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12.0),
-                                                    ),
-                                                    focusedBorder:
-                                                        OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primary,
-                                                        width: 2.0,
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12.0),
-                                                    ),
-                                                    errorBorder:
-                                                        OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .error,
-                                                        width: 2.0,
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12.0),
-                                                    ),
-                                                    focusedErrorBorder:
-                                                        OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .error,
-                                                        width: 2.0,
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12.0),
-                                                    ),
-                                                    filled: true,
-                                                    fillColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .primaryBackground,
-                                                    suffixIcon: InkWell(
-                                                      onTap: () => setState(
-                                                        () => _model
-                                                                .numeroDePredialVisibility =
-                                                            !_model
-                                                                .numeroDePredialVisibility,
-                                                      ),
-                                                      focusNode: FocusNode(
-                                                          skipTraversal: true),
-                                                      child: Icon(
-                                                        _model.numeroDePredialVisibility
-                                                            ? Icons
-                                                                .visibility_outlined
-                                                            : Icons
-                                                                .visibility_off_outlined,
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .secondaryText,
-                                                        size: 24.0,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyLarge,
-                                                  minLines: 1,
-                                                  keyboardType:
-                                                      TextInputType.number,
-                                                  validator: _model
-                                                      .numeroDePredialControllerValidator
-                                                      .asValidator(context),
-                                                ),
-                                              );
-                                            },
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 16.0),
-                                          child: StreamBuilder<
-                                              List<ClientesRecord>>(
-                                            stream: queryClientesRecord(
-                                              singleRecord: true,
-                                            ),
-                                            builder: (context, snapshot) {
-                                              // Customize what your widget looks like when it's loading.
-                                              if (!snapshot.hasData) {
-                                                return Center(
-                                                  child: SizedBox(
-                                                    width: 50.0,
-                                                    height: 50.0,
-                                                    child:
-                                                        CircularProgressIndicator(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary,
-                                                    ),
-                                                  ),
-                                                );
-                                              }
-                                              List<ClientesRecord>
-                                                  buttonClientesRecordList =
-                                                  snapshot.data!;
-                                              // Return an empty Container when the item does not exist.
-                                              if (snapshot.data!.isEmpty) {
-                                                return Container();
-                                              }
-                                              final buttonClientesRecord =
-                                                  buttonClientesRecordList
-                                                          .isNotEmpty
-                                                      ? buttonClientesRecordList
-                                                          .first
-                                                      : null;
-                                              return FFButtonWidget(
-                                                onPressed: () async {
-                                                  final _datePickedDate =
-                                                      await showDatePicker(
-                                                    context: context,
-                                                    initialDate:
-                                                        getCurrentTimestamp,
-                                                    firstDate:
-                                                        getCurrentTimestamp,
-                                                    lastDate: DateTime(2050),
-                                                  );
-
-                                                  TimeOfDay? _datePickedTime;
-                                                  if (_datePickedDate != null) {
-                                                    _datePickedTime =
-                                                        await showTimePicker(
-                                                      context: context,
-                                                      initialTime: TimeOfDay
-                                                          .fromDateTime(
-                                                              getCurrentTimestamp),
-                                                    );
-                                                  }
-
-                                                  if (_datePickedDate != null &&
-                                                      _datePickedTime != null) {
-                                                    setState(() {
-                                                      _model.datePicked =
-                                                          DateTime(
-                                                        _datePickedDate.year,
-                                                        _datePickedDate.month,
-                                                        _datePickedDate.day,
-                                                        _datePickedTime!.hour,
-                                                        _datePickedTime.minute,
-                                                      );
-                                                    });
-                                                  }
-                                                },
-                                                text:
-                                                    FFLocalizations.of(context)
-                                                        .getText(
-                                                  '091hr067' /* Fecha de Pago  */,
-                                                ),
-                                                options: FFButtonOptions(
-                                                  width: double.infinity,
-                                                  height: 44.0,
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          0.0, 0.0, 0.0, 0.0),
-                                                  iconPadding:
-                                                      EdgeInsetsDirectional
-                                                          .fromSTEB(0.0, 0.0,
-                                                              0.0, 0.0),
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primary,
-                                                  textStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .titleSmall
-                                                          .override(
-                                                            fontFamily:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleSmallFamily,
-                                                            color: Colors.white,
-                                                            useGoogleFonts: GoogleFonts
-                                                                    .asMap()
-                                                                .containsKey(
-                                                                    FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .titleSmallFamily),
-                                                          ),
-                                                  elevation: 3.0,
-                                                  borderSide: BorderSide(
-                                                    color: Colors.transparent,
-                                                    width: 1.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          12.0),
-                                                ),
-                                              );
-                                            },
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 24.0),
-                                          child: Container(
-                                            width: double.infinity,
-                                            child: Stack(
-                                              alignment: AlignmentDirectional(
-                                                  0.0, 0.0),
-                                              children: [
-                                                Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          0.0, 0.0),
-                                                  child: Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 12.0,
-                                                                0.0, 12.0),
-                                                    child: Container(
-                                                      width: double.infinity,
-                                                      height: 2.0,
-                                                      decoration: BoxDecoration(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primary600,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                                Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          0.0, 0.0),
-                                                  child: Container(
-                                                    width: 70.0,
-                                                    height: 32.0,
-                                                    decoration: BoxDecoration(
-                                                      color: FlutterFlowTheme
-                                                              .of(context)
-                                                          .secondaryBackground,
-                                                    ),
-                                                    alignment:
-                                                        AlignmentDirectional(
-                                                            0.0, 0.0),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 16.0),
-                                          child: FFButtonWidget(
-                                            onPressed: () async {
-                                              var confirmDialogResponse =
-                                                  await showDialog<bool>(
-                                                        context: context,
-                                                        builder:
-                                                            (alertDialogContext) {
-                                                          return AlertDialog(
-                                                            title: Text(
-                                                                'Sus Datos de cliente se guardaran '),
-                                                            content: Text(
-                                                                '¿Esta seguro que desea guardar los datos?'),
-                                                            actions: [
-                                                              TextButton(
-                                                                onPressed: () =>
-                                                                    Navigator.pop(
-                                                                        alertDialogContext,
-                                                                        false),
-                                                                child: Text(
-                                                                    'Cancel'),
-                                                              ),
-                                                              TextButton(
-                                                                onPressed: () =>
-                                                                    Navigator.pop(
-                                                                        alertDialogContext,
-                                                                        true),
-                                                                child: Text(
-                                                                    'Confirm'),
-                                                              ),
-                                                            ],
-                                                          );
-                                                        },
-                                                      ) ??
-                                                      false;
-
-                                              final clientesCreateData =
-                                                  createClientesRecordData();
-                                              await ClientesRecord.collection
-                                                  .doc()
-                                                  .set(clientesCreateData);
-                                            },
-                                            text: FFLocalizations.of(context)
-                                                .getText(
-                                              'z5vjlwb8' /* Guardar */,
-                                            ),
-                                            icon: Icon(
-                                              Icons.save_sharp,
-                                              size: 20.0,
-                                            ),
-                                            options: FFButtonOptions(
-                                              width: double.infinity,
-                                              height: 44.0,
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0.0, 0.0, 0.0, 0.0),
-                                              iconPadding: EdgeInsetsDirectional
-                                                  .fromSTEB(0.0, 0.0, 0.0, 0.0),
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryBackground,
-                                              textStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .titleSmall
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .titleSmallFamily,
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryText,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleSmallFamily),
-                                                      ),
-                                              elevation: 0.0,
-                                              borderSide: BorderSide(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primary600,
-                                                width: 2.0,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(12.0),
-                                              hoverColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryBackground,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
+                              child: container,
                             );
                           },
                         ),
@@ -1665,4 +574,13 @@ class _ClientenuevoWidgetState extends State<ClientenuevoWidget> {
       ),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>>(
+        '_clientenuevoRecord', _clientenuevoRecord));
+  }
 }
+
+get createClientenuevoRecord {}
