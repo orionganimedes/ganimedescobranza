@@ -69,13 +69,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, _) =>
-          appStateNotifier.loggedIn ? NavBarPage() : LoginWidget(),
+          appStateNotifier.loggedIn ? HomeWidget() : LoginWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? NavBarPage() : LoginWidget(),
+              appStateNotifier.loggedIn ? HomeWidget() : LoginWidget(),
           routes: [
             FFRoute(
               name: 'Login',
@@ -92,26 +92,17 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'Clientes_list',
               path: 'clientesList',
-              builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'Clientes_list')
-                  : NavBarPage(
-                      initialPage: 'Clientes_list',
-                      page: ClientesListWidget(),
-                    ),
+              builder: (context, params) => ClientesListWidget(),
             ),
             FFRoute(
               name: 'userDetails',
               path: 'userDetails',
-              builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'userDetails')
-                  : UserDetailsWidget(),
+              builder: (context, params) => UserDetailsWidget(),
             ),
             FFRoute(
               name: 'agenda',
               path: 'agenda',
-              builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'agenda')
-                  : AgendaWidget(),
+              builder: (context, params) => AgendaWidget(),
             ),
             FFRoute(
               name: 'clientenuevo',

@@ -463,8 +463,8 @@ class _AgendaWidgetState extends State<AgendaWidget> {
                                                                     Text(
                                                                       dateTimeFormat(
                                                                         'relative',
-                                                                        listViewClientesRecord
-                                                                            .fechaDePago!,
+                                                                        listViewClientesRecord.fechaDePago ??
+                                                                            DateTime.now(),
                                                                         locale:
                                                                             FFLocalizations.of(context).languageCode,
                                                                       ),
