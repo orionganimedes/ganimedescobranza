@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "944425604488",
+    "firebase_url": "https://ganimedes-20dce-default-rtdb.firebaseio.com",
+    "project_id": "ganimedes-20dce",
+    "storage_bucket": "ganimedes-20dce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:944425604488:android:a50ff0df38647825ae563d",
+        "android_client_info": {
+          "package_name": "com.mycompany.crmapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "944425604488-v8vlsn4q2f284k6np7t6hhuofl8hems0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGmw9Od0Dy7TqbTL-y2SakFLb0i6i9RAc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "944425604488-v8vlsn4q2f284k6np7t6hhuofl8hems0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "944425604488-o7svjn4slf917ljav0ff5ovnck378r8c.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mycompany.crmapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
